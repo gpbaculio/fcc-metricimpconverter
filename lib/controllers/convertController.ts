@@ -76,7 +76,7 @@ export default class ConverController {
       lbs: lbsToKg,
       kg: 1 / lbsToKg
     };
-    return eval(initNum) * convertTable[unit].toFixed(5);
+    return Math.round(eval(initNum) * convertTable[unit] * 10 ** 5) / 10 ** 5;
   };
   public spellOutUnit = (unit, val) => {
     const primaryUnits = Object.keys(units);
