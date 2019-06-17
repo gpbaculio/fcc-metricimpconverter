@@ -16,6 +16,9 @@ class App {
   public convertRoute: ConvertRoute = new ConvertRoute();
   public fccTestingRoute: FccTestingRoute = new FccTestingRoute();
   constructor() {
+    this.app.use(helmet());
+    this.app.use(helmet.noSniff()); // prevent client to guess(sniff) the MIME type.
+    this.app.use(helmet.xssFilter());
     this.app.use(
       bodyParser.urlencoded({
         extended: true
