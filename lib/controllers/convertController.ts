@@ -81,9 +81,10 @@ export default class ConverController {
   public spellOutUnit = (unit, val) => {
     const primaryUnits = Object.keys(units);
     let result;
+    const un = unit.toLowerCase();
     primaryUnits.forEach(k => {
       const metricKeys = Object.keys(units[k]);
-      if (metricKeys.includes(unit)) result = units[k][unit];
+      if (metricKeys.includes(un)) result = units[k][un];
     });
     return `${result}${eval(val) > 1 ? 's' : ''}`;
   };
