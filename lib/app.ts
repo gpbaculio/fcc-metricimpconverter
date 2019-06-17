@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 var cors = require('cors');
 const helmet = require('helmet');
-const session = require('express-session');
 const uuidv1 = require('uuid/v1');
 require('dotenv').config();
 
@@ -25,7 +24,7 @@ class App {
         extended: true
       })
     );
-    this.app.use(cors({ optionSuccessStatus: 200 }));
+    this.app.use(cors({ origin: '*' }));
     this.app.use(bodyParser.json());
 
     this.app.use(express.static(path.join(__dirname, '..', 'public')));
