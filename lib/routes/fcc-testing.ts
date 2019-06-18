@@ -86,7 +86,7 @@ export default class FCCTesting {
       function(req, res, next) {
         console.log(error);
         if (!error && process.env.NODE_ENV === 'test') return next();
-        res.json({ status: 'unavailable' });
+        res.json({ status: error });
       },
       function(req, res, next) {
         if (!runner.report) return next();
