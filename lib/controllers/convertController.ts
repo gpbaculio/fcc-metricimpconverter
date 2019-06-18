@@ -40,7 +40,7 @@ export default class ConverController {
         .every(count => count <= 1);
       if (!validDecs) return null;
     }
-    return Number(inputNum);
+    return eval(inputNum);
   };
   public getUnit = input => {
     const unitKeys = Object.keys(units)
