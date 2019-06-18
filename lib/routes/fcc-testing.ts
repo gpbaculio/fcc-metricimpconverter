@@ -32,7 +32,7 @@ var fs = require('fs');
 var runner = require('../test-runner');
 
 export default class FCCTesting {
-  public testFilter = (tests, type, n) => {
+  testFilter = (tests, type, n) => {
     var out;
     switch (type) {
       case 'unit':
@@ -86,7 +86,7 @@ export default class FCCTesting {
       function(req, res, next) {
         console.log(error);
         if (!error && process.env.NODE_ENV === 'test') return next();
-        res.json({ status: error });
+        res.json({ status: 'unavailable' });
       },
       function(req, res, next) {
         if (!runner.report) return next();

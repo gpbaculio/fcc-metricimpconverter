@@ -9,16 +9,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 const units = {
     volume: {
-        l: 'Liter',
-        gal: 'Gallon'
+        l: 'liter',
+        gal: 'gallon'
     },
     length: {
-        mi: 'Mile',
-        km: 'Kilometer'
+        mi: 'mile',
+        km: 'kilometer'
     },
     weight: {
-        lbs: 'Pound',
-        kg: 'Kilogram'
+        lbs: 'pound',
+        kg: 'kilogram'
     }
 };
 class ConverController {
@@ -46,7 +46,7 @@ class ConverController {
                 if (!validDecs)
                     return null;
             }
-            return fractionCount ? inputNum : Number(inputNum);
+            return eval(inputNum);
         };
         this.getUnit = input => {
             const unitKeys = Object.keys(units)
@@ -84,15 +84,16 @@ class ConverController {
                 lbs: lbsToKg,
                 kg: 1 / lbsToKg
             };
-            return eval(initNum) * convertTable[unit].toFixed(5);
+            return Math.round(eval(initNum) * convertTable[unit] * Math.pow(10, 5)) / Math.pow(10, 5);
         };
         this.spellOutUnit = (unit, val) => {
             const primaryUnits = Object.keys(units);
             let result;
+            const un = unit.toLowerCase();
             primaryUnits.forEach(k => {
                 const metricKeys = Object.keys(units[k]);
-                if (metricKeys.includes(unit))
-                    result = units[k][unit];
+                if (metricKeys.includes(un))
+                    result = units[k][un];
             });
             return `${result}${eval(val) > 1 ? 's' : ''}`;
         };

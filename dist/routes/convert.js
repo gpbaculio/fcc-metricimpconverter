@@ -18,11 +18,11 @@ class ApiRoutes {
             const initNum = this.convertController.getNum(input);
             const initUnit = this.convertController.getUnit(input);
             if (!initNum && !initUnit)
-                return res.send('Invalid number and unit');
+                return res.send('invalid number and unit');
             if (!initUnit)
-                return res.send('Invalid unit');
+                return res.send('invalid unit');
             if (!initNum)
-                return res.send('Invalid number');
+                return res.send('invalid number');
             const returnNum = this.convertController.convert(initNum, initUnit);
             const returnUnit = this.convertController.getReturnUnit(initUnit);
             const toString = this.convertController.getString(initNum, initUnit, returnNum, returnUnit);

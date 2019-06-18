@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 var cors = require('cors');
 const helmet = require('helmet');
+const session = require('express-session');
 const uuidv1 = require('uuid/v1');
 require('dotenv').config();
 // tests
@@ -18,10 +19,23 @@ class App {
         this.app.use(helmet());
         this.app.use(helmet.noSniff()); // prevent client to guess(sniff) the MIME type.
         this.app.use(helmet.xssFilter());
+        // secure cookies with express-session
+        const sessionConfig = {
+            secret: process.env.SECRET_KEY,
+            genid: () => uuidv1(),
+            cookie: {},
+            resave: true,
+            saveUninitialized: true
+        };
+        if (process.env.NODE_ENV === 'production') {
+            this.app.set('trust proxy', 1); // trust first proxy
+            sessionConfig.cookie.secure = true; // serve secure cookies
+        }
+        this.app.use(session(sessionConfig));
         this.app.use(bodyParser.urlencoded({
             extended: true
         }));
-        this.app.use(cors({ origin: '*' }));
+        this.app.use(cors({ optionSuccessStatus: 200, origin: '*' }));
         this.app.use(bodyParser.json());
         this.app.use(express.static(path.join(__dirname, '..', 'public')));
         this.fccTestingRoute.routes(this.app);
