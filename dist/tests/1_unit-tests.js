@@ -25,12 +25,12 @@ suite('Unit Tests', function () {
         });
         test('Fractional Input', function (done) {
             var input = '3/2L';
-            assert.equal(convertHandler.getNum(input), '3/2');
+            assert.equal(convertHandler.getNum(input), 1.5);
             done();
         });
         test('Fractional Input w/ Decimal', function (done) {
             var input = '3.5/2.3L';
-            assert.equal(convertHandler.getNum(input), '3.5/2.3');
+            assert.equal(convertHandler.getNum(input), eval('3.5/2.3'));
             done();
         });
         test('Invalid Input (double fraction)', function (done) {
@@ -94,12 +94,12 @@ suite('Unit Tests', function () {
         test('For Each Valid Unit Inputs', function (done) {
             var input = ['gal', 'l', 'mi', 'km', 'lbs', 'kg'];
             var expect = [
-                'Gallon',
-                'Liter',
-                'Mile',
-                'Kilometer',
-                'Pound',
-                'Kilogram'
+                'gallon',
+                'liter',
+                'mile',
+                'kilometer',
+                'pound',
+                'kilogram'
             ];
             input.forEach(function (ele, i) {
                 assert.equal(convertHandler.spellOutUnit(ele, 1), expect[i]);
