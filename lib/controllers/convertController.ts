@@ -40,7 +40,7 @@ export default class ConverController {
         .every(count => count <= 1);
       if (!validDecs) return null;
     }
-    return fractionCount ? inputNum : Number(inputNum);
+    return Number(inputNum);
   };
   public getUnit = input => {
     const unitKeys = Object.keys(units)
