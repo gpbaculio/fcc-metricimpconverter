@@ -29,26 +29,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var cors = require('cors');
 var fs = require('fs');
 var runner = require('../test-runner');
-class FCCTesting {
-    constructor() {
-        this.testFilter = (tests, type, n) => {
-            var out;
-            switch (type) {
-                case 'unit':
-                    out = tests.filter(t => t.context.match('Unit Tests'));
-                    break;
-                case 'functional':
-                    out = tests.filter(t => t.context.match('Functional Tests') && !t.title.match('#example'));
-                    break;
-                default:
-                    out = tests;
-            }
-            if (n !== undefined) {
-                return out[n] || out;
-            }
-            return out;
-        };
+const testFilter = (tests, type, n) => {
+    var out;
+    switch (type) {
+        case 'unit':
+            out = tests.filter(t => t.context.match('Unit Tests'));
+            break;
+        case 'functional':
+            out = tests.filter(t => t.context.match('Functional Tests') && !t.title.match('#example'));
+            break;
+        default:
+            out = tests;
     }
+    if (n !== undefined) {
+        return out[n] || out;
+    }
+    return out;
+};
+class FCCTesting {
     routes(app) {
         app.route('/_api/server.js').get(function (req, res, next) {
             console.log('requested');
@@ -85,10 +83,10 @@ class FCCTesting {
         }, function (req, res, next) {
             if (!runner.report)
                 return next();
-            res.json(this.testFilter(runner.report, req.query.type, req.query.n));
+            res.json(testFilter(runner.report, req.query.type, req.query.n));
         }, function (req, res) {
             runner.on('done', function (report) {
-                process.nextTick(() => res.json(this.testFilter(runner.report, req.query.type, req.query.n)));
+                process.nextTick(() => res.json(testFilter(runner.report, req.query.type, req.query.n)));
             });
         });
         app.get('/_api/app-info', function (req, res) {
