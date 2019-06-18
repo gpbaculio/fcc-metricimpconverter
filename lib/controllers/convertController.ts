@@ -7,16 +7,16 @@
  */
 const units = {
   volume: {
-    l: 'Liter',
-    gal: 'Gallon'
+    l: 'liter',
+    gal: 'gallon'
   },
   length: {
-    mi: 'Mile',
-    km: 'Kilometer'
+    mi: 'mile',
+    km: 'kilometer'
   },
   weight: {
-    lbs: 'Pound',
-    kg: 'Kilogram'
+    lbs: 'pound',
+    kg: 'kilogram'
   }
 };
 
