@@ -30,7 +30,7 @@
     "express-session": "^1.16.2",
     "fs": "0.0.1-security",
     "helmet": "^3.18.0",
-    "mocha": "^6.1.4",
+    "mocha": "^10.2.0",
     "nodemon": "^1.19.1",
     "typescript": "^3.5.2",
     "uuid": "^3.3.2"
